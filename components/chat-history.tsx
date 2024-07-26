@@ -13,7 +13,8 @@ interface ChatHistoryProps {
 
 export async function ChatHistory({ userId }: ChatHistoryProps) {
   return (
-    <div className="flex flex-col h-full">
+    // <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full" style={{ backgroundColor: '#0684BC' }}>
       <div className="flex items-center justify-between p-4">
         <h4 className="text-sm font-medium">Chat History</h4>
       </div>

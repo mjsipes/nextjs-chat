@@ -4,7 +4,7 @@ import { notFound, redirect } from 'next/navigation'
 import { formatDate } from '@/lib/utils'
 import { getSharedChat } from '@/app/actions'
 import { ChatList } from '@/components/chat-list'
-import { FooterText } from '@/components/footer'
+// import { FooterText } from '@/components/footer'
 import { AI, UIState, getUIStateFromAIState } from '@/lib/chat/actions'
 
 export const runtime = 'edge'
@@ -52,7 +52,7 @@ export default async function SharePage({ params }: SharePageProps) {
           <ChatList messages={uiState} isShared={true} />
         </AI>
       </div>
-      <FooterText className="py-8" />
+      {/* <FooterText className="py-8" /> */}
     </>
   )
 }
