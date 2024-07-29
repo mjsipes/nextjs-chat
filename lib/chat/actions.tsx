@@ -14,6 +14,7 @@ import { z } from 'zod'
 import { nanoid } from '@/lib/utils'
 import { saveChat } from '@/app/actions'
 import { auth } from '@/auth'
+import { Chat, Message } from '@/lib/types'
 
 async function submitUserMessage(content: string) {
   'use server'
