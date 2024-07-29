@@ -16,6 +16,7 @@ import { saveChat } from '@/app/actions'
 import { auth } from '@/auth'
 import { Chat, Message } from '@/lib/types'
 
+
 async function submitUserMessage(content: string) {
   'use server'
 
@@ -122,7 +123,7 @@ async function submitUserMessage(content: string) {
       
           return (
             <div>
-              <ArticleList articles={similarArticles} />
+              {similarArticles}
             </div>
           );
         }
@@ -220,7 +221,6 @@ export const getUIStateFromAIState = (aiState: Chat) => {
 
 
 
-// // Example of the SimilaritySearch function
 // async function SimilaritySearch(query: string) {
 //   return [
 //     { id: 1, title: 'Article 1', content: 'Content for article 1 related to ' + query },
@@ -230,7 +230,7 @@ export const getUIStateFromAIState = (aiState: Chat) => {
 // }
 
 
-async function SimilaritySearch(query) {
+async function SimilaritySearch(query: string) {
   const url = 'https://jefqrizenjvzaumvplgl.supabase.co/functions/v1/simple-search';
   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplZnFyaXplbmp2emF1bXZwbGdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAwMzkyMTgsImV4cCI6MjAzNTYxNTIxOH0.Ixv8dBPDBAky3suPB6SfBHRAM9EHufg0OPp3xYWFusg';
 
@@ -260,20 +260,3 @@ async function SimilaritySearch(query) {
   }
 }
 
-// // Example usage
-// SimilaritySearch('babwqy').then(results => console.log(results));
-
-
-// Example of the ArticleList component
-function ArticleList({ articles }) {
-  return (
-    <div>
-      {articles.map(article => (
-        <div key={article.id}>
-          <h2>{article.title}</h2>
-          <p>{article.content}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
