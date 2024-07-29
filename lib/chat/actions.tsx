@@ -11,7 +11,7 @@ import {
 import { openai } from '@ai-sdk/openai'
 // import { SimilaritySearch, ArticleList } from './SearchHelper'
 import { BotMessage, SpinnerMessage, UserMessage } from '@/components/stocks/message'
-import { Stock, StockSkeleton } from '@/components/stocks/stock'
+// import { Stock, StockSkeleton } from '@/components/stocks/stock'
 import { z } from 'zod'
 import { nanoid } from '@/lib/utils'
 import { saveChat } from '@/app/actions'
