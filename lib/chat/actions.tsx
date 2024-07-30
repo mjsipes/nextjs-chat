@@ -120,10 +120,12 @@ async function submitUserMessage(content: string) {
               }
             ]
           });
+          console.log('similarArticles', similarArticles);
       
           return (
             <div>
-              {similarArticles}
+              {/* {similarArticles} */}
+              <ArticleList articles={similarArticles} />
             </div>
           );
         }
@@ -260,3 +262,25 @@ async function SimilaritySearch(query: string) {
   }
 }
 
+type Article = {
+  id: number;
+  title: string;
+  content: string;
+};
+
+type ArticleListProps = {
+  articles: Article[];
+};
+
+function ArticleList({ articles }: ArticleListProps) {
+  return (
+    <div>
+      {articles.map(article => (
+        <div key={article.id}>
+          <h2>{article.title}</h2>
+          <p>{article.content}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
