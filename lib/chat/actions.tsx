@@ -9,13 +9,16 @@ import {
   createStreamableValue
 } from 'ai/rsc'
 import { openai } from '@ai-sdk/openai'
-import { BotMessage, SpinnerMessage, UserMessage } from '@/components/stocks/message'
+import {
+  BotMessage,
+  SpinnerMessage,
+  UserMessage
+} from '@/components/stocks/message'
 import { z } from 'zod'
 import { nanoid } from '@/lib/utils'
 import { saveChat } from '@/app/actions'
 import { auth } from '@/auth'
 import { Chat, Message } from '@/lib/types'
-
 
 async function submitUserMessage(content: string) {
   'use server'
@@ -38,7 +41,7 @@ async function submitUserMessage(content: string) {
   let textNode: undefined | React.ReactNode
 
   const result = await streamUI({
-    model: openai('gpt-3.5-turbo'),
+    model: openai('ft:gpt-4o-mini-2024-07-18:personal::9u8Ap51f'),
     initial: <SpinnerMessage />,
     system: `\
      You are a support article writer for a cloud communications company called RingCentral.
@@ -82,14 +85,16 @@ async function submitUserMessage(content: string) {
       listArticles: {
         description: 'Get a list of articles similar to the query.',
         parameters: z.object({
-          query: z.string().describe('The query string to search for similar articles.')
+          query: z
+            .string()
+            .describe('The query string to search for similar articles.')
         }),
         generate: async function* ({ query }) {
-          const toolCallId = nanoid();
-      
+          const toolCallId = nanoid()
+
           // Function to perform similarity search based on the query
-          const similarArticles = await SimilaritySearch(query);
-      
+          const similarArticles = await SimilaritySearch(query)
+
           aiState.done({
             ...aiState.get(),
             messages: [
@@ -119,15 +124,15 @@ async function submitUserMessage(content: string) {
                 ]
               }
             ]
-          });
-          console.log('similarArticles', similarArticles);
-      
+          })
+          console.log('similarArticles', similarArticles)
+
           return (
             <div>
               {/* {similarArticles} */}
               <ArticleList articles={similarArticles} />
             </div>
-          );
+          )
         }
       }
     }
@@ -217,12 +222,6 @@ export const getUIStateFromAIState = (aiState: Chat) => {
     }))
 }
 
-
-
-
-
-
-
 // async function SimilaritySearch(query: string) {
 //   return [
 //     { id: 1, title: 'Article 1', content: 'Content for article 1 related to ' + query },
@@ -231,46 +230,47 @@ export const getUIStateFromAIState = (aiState: Chat) => {
 //   ];
 // }
 
-
 async function SimilaritySearch(query: string) {
-  const url = 'https://jefqrizenjvzaumvplgl.supabase.co/functions/v1/simple-search';
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplZnFyaXplbmp2emF1bXZwbGdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAwMzkyMTgsImV4cCI6MjAzNTYxNTIxOH0.Ixv8dBPDBAky3suPB6SfBHRAM9EHufg0OPp3xYWFusg';
+  const url =
+    'https://jefqrizenjvzaumvplgl.supabase.co/functions/v1/simple-search'
+  const token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplZnFyaXplbmp2emF1bXZwbGdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAwMzkyMTgsImV4cCI6MjAzNTYxNTIxOH0.Ixv8dBPDBAky3suPB6SfBHRAM9EHufg0OPp3xYWFusg'
 
   const headers = {
-    'Authorization': `Bearer ${token}`,
+    Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json'
-  };
+  }
 
-  const body = JSON.stringify({ query });
+  const body = JSON.stringify({ query })
 
   try {
     const response = await fetch(url, {
       method: 'POST',
       headers: headers,
       body: body
-    });
+    })
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP error! status: ${response.status}`)
     }
 
-    const data = await response.json();
-    return data;
+    const data = await response.json()
+    return data
   } catch (error) {
-    console.error('Error:', error);
-    return [];
+    console.error('Error:', error)
+    return []
   }
 }
 
 type Article = {
-  id: number;
-  title: string;
-  content: string;
-};
+  id: number
+  title: string
+  content: string
+}
 
 type ArticleListProps = {
-  articles: Article[];
-};
+  articles: Article[]
+}
 
 function ArticleList({ articles }: ArticleListProps) {
   return (
@@ -282,5 +282,5 @@ function ArticleList({ articles }: ArticleListProps) {
         </div>
       ))}
     </div>
-  );
+  )
 }
