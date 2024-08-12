@@ -342,7 +342,7 @@ function ArticleList({ articles }: ArticleListProps) {
   )
 }
 
-async function updateKBArticle(query) {
+async function updateKBArticle(String: query) {
   const instructions = `# Allowing attendees to speak during a RingCentral Webinar
 
 **Last Updated: May 01, 2024**
