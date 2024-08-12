@@ -449,7 +449,7 @@ If a webinar host invites you to speak, a notification will pop up in your webin
 4. When you’re done speaking, the host will return you to viewing mode as a regular, nonspeaking attendee. Click **Got it**.
    - If you’d like to speak again, click **Speak live** to send a new request, then repeat the process.
 
-# Requesting to speak during a Webinar on the RingCentral mobile app
+# Requesting to speak  during a Webinar on the RingCentral mobile app
 
 If the webinar host has allowed live speaking requests from attendees, you can request to speak.
 
