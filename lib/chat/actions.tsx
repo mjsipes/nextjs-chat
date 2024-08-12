@@ -185,7 +185,7 @@ async function submitUserMessage(content: string) {
 
           return (
             <div>
-              <Markdown>{updatedArticle}</Markdown>
+              <Markdown>{String(updatedArticle)}</Markdown>
             </div>
           )
         }
