@@ -42,9 +42,10 @@ export function ChatPanel({
     },
     {
       heading: 'Update KB Article',
-      subheading: 'Provide a rough draft or existing KB article',
+      subheading:
+        'Please update/revise the following rough draft or existing KB article.',
       message: 'Update KB Article'
-    },
+    }
   ]
 
   return (
