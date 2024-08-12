@@ -222,14 +222,6 @@ export const getUIStateFromAIState = (aiState: Chat) => {
     }))
 }
 
-// async function SimilaritySearch(query: string) {
-//   return [
-//     { id: 1, title: 'Article 1', content: 'Content for article 1 related to ' + query },
-//     { id: 2, title: 'Article 2', content: 'Content for article 2 related to ' + query },
-//     { id: 3, title: 'Article 3', content: 'Content for article 3 related to ' + query }
-//   ];
-// }
-
 async function SimilaritySearch(query: string) {
   const url =
     'https://jefqrizenjvzaumvplgl.supabase.co/functions/v1/simple-search'
@@ -275,12 +267,22 @@ type ArticleListProps = {
 function ArticleList({ articles }: ArticleListProps) {
   return (
     <div>
-      {articles.map(article => (
-        <div key={article.id}>
-          <h2>{article.title}</h2>
-          <p>{article.content}</p>
-        </div>
-      ))}
+      {articles.map(article => {
+        // Transform the title
+        const formattedTitle = article.title
+          .replace(/^\d+/, '') // Remove the ID at the beginning
+          .replace(/\.md$/, '') // Remove the '.md' extension at the end
+          .replace(/_/g, ' ') // Replace underscores with spaces
+
+        console.log(formattedTitle) // Log the transformed title
+
+        return (
+          <div key={article.id}>
+            <h2>{formattedTitle}</h2>
+            <p>{article.content}</p>
+          </div>
+        )
+      })}
     </div>
   )
 }
